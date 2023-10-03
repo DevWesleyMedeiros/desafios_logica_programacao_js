@@ -1,0 +1,12 @@
+Tudo que eu quiser zerar em JavaScript, eu colocarei em primeira linha
+Tudo que eu quiser colocar valores textuais vazios, eu coloco com ""
+
+Método "FILTER()" no meu contexto é usado para filtrar do meu arrayCarro valores diferentes daqueles personalizados
+Quando passado, ele deve ter ser armazenado em um novo array, uma vez que eu estou fazendo um filtro de novos valores para um novo arrayCarro
+
+"DATA- seguida de um nome" personalizar atributos em HTML.
+DATASET acessa tal atributo
+
+let quemRemover = evento.target.parentNode.dataset.nome
+"TARGET" captar se o elemento que eu quero esta sendo captado
+Na linha acima eu capturo o evento de clique no elemento alvo, pegando o elemento pai através do atributo personalizado
