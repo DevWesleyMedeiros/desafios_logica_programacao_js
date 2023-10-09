@@ -7,7 +7,36 @@
     <title>Frase palindroma</title>
 </head>
 <body>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html{
+            height: 100px;
+        }
+        div.divResultado{
+            width: 150px;
+            height: 100px; 
+            border: 2px solid black;
+        }
+    </style>
+    <div class="texto">
+        <label for="frase">Escreva uma frase:</label>
+        <input type="text" name="frase" id="frase">
+        <input type="submit" name="acao" value="Enviar" id="btn_enviar">
+    </div>
     <script>
+        const btnSubmit = document.querySelector("#btn_enviar")
+        const textoHtml = document.getElementById("frase")
+        function criarElemento(){
+            let resultado = frasePalindroma()
+            let div = document.createElement("div")
+            div.setAttribute("class", "divResultado")
+            div.setAttribute("id", "div_resultado")
+            div.innerHTML = resultado
+        }
         function frasePalindroma(texto){
             let fraseSemEspaco = texto.replace(/\s/g, "") // elimino os espaço da frase
             let frase = fraseSemEspaco.split('') // array de letras 
@@ -19,8 +48,7 @@
                 return `A frase ${texto} NÃO é PALINDROMA!!`
             }
         }
-        const frase = "A sacada da casa"
-        console.log(frasePalindroma(frase))
+        btnSubmit.addEventListener("click", criarElemento)
     </script>
 </body>
 </html>
