@@ -2,12 +2,16 @@ class Cxmsg{
     static cor = "#888";
     static destino = null;
     static divMsg = null;
-    
-    static config = (config) =>{
-        this.cor = config.cor;
-    }
+    static tipo = null;
+    static comando = null;
+    static textos = [];
+
     // Método que mostrará minha caixa de dialago
-    static mostrarCaixa = (titulo, texto) =>{
+    static mostrarCaixa = (config, titulo, texto) =>{
+        this.cor = config.cor;
+        this.tipo = config.tipo;
+        this.comando = config.comando;
+        this.textos = config.textos;
         this.destino = document.body;
         this.titulo = titulo;
         this.texto = texto;
@@ -29,14 +33,13 @@ class Cxmsg{
         this.destino.prepend(this.divMsg);
 
         //Cria uma div caixa de estilo onde aparecerá o título, texto etc.
+        const areaCaixaMsg = document.createElement("div");
         const estiloAreaCmsg = `
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;
             flex-direction: column;
             width: 300px`;
-
-        const areaCaixaMsg = document.createElement("div");
         areaCaixaMsg.setAttribute("style", estiloAreaCmsg);
         this.divMsg.appendChild(areaCaixaMsg);
 
@@ -84,7 +87,6 @@ class Cxmsg{
         areaCaixaMsg.appendChild(divCaixaRodape);
 
         // Cria o botão para o centro do rodapé
-        const btnOk = document.createElement("button");
         const estiloButao = `
             background-color: ${this.cor};
             color: #fff;
@@ -92,13 +94,31 @@ class Cxmsg{
             border-radius: 5px;
             cursor: pointer;
             text-transform: uppercase`;
-        btnOk.setAttribute("style", estiloButao);
-        btnOk.innerHTML = "Ok";
-        btnOk.addEventListener("click", (evt)=>{
-            this.ocultarCaixa();
-        })
-        divCaixaRodape.appendChild(btnOk);
+        if (this.tipo == "OK") {
+            const btnOk = document.createElement("button");
+            btnOk.setAttribute("style", estiloButao);
+            btnOk.innerHTML = "Ok";
+            btnOk.addEventListener("click", (evt)=>{
+                this.ocultarCaixa();
+            })
+            divCaixaRodape.appendChild(btnOk);
+        }else if(this.tipo == "sn"){
+            const btnSim = document.createElement("button");
+            btnSim.setAttribute("style", estiloButao);
+            btnSim.innerHTML = this.textos[0];
+            btnSim.addEventListener("click", (evt)=>{
+                this.ocultarCaixa();
+            })
+            divCaixaRodape.appendChild(btnSim);
 
+            const btnNao = document.createElement("button");
+            btnNao.setAttribute("style", estiloButao);
+            btnNao.innerHTML = this.textos[1];
+            btnNao.addEventListener("click", (evt)=>{
+                this.ocultarCaixa();
+            })
+            divCaixaRodape.appendChild(btnNao);
+        }
     }
     static ocultarCaixa = () =>{
         // Remover a div pai
